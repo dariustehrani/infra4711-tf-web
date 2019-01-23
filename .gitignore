@@ -7,3 +7,17 @@
 
 # .tfvars files
 *.tfvars
+
+# manually created plans
+tfplan
+plantf
+.plan
+
+# secrets
+.credentials
+.pem
+.ppk
+.out
+.id
+id_rsa
+
