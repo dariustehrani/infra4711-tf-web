@@ -30,7 +30,7 @@ resource "azurerm_public_ip" "infra" {
   name                         = "${var.project_name}-public-ip"
   location                     = "${var.location}"
   resource_group_name          = "${azurerm_resource_group.infra.name}"
-  allocation_method = "static"
+  allocation_method            =  "Static"
   domain_name_label            = "${random_string.fqdn.result}"
   tags                         = "${var.tags}"
 }
