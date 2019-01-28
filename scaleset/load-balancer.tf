@@ -40,22 +40,6 @@ resource "azurerm_lb_probe" "infra" {
  port                = "${var.application_port}"
 }
 
-
-/*
-resource "azurerm_lb_nat_pool" "natpool" {
-  resource_group_name            = "${var.resource_group_name}"
-  loadbalancer_id                = "${azurerm_lb.infra.id}"
-  name                           = "NATPool"
-  protocol                       = "Tcp"
-  frontend_port_start            = 50000
-  frontend_port_end              = 50119
-  backend_port                   = "${var.application_port}"
-  frontend_ip_configuration_name = "PublicIPAddress"
-}
-*/
-
-
-
 resource "azurerm_lb_rule" "lbrule" {
    resource_group_name            = "${var.resource_group_name}"
    loadbalancer_id                = "${azurerm_lb.infra.id}"
