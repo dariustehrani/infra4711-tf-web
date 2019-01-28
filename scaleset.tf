@@ -7,7 +7,7 @@ module "web_scaleset" {
   tags                  = "${var.tags}"
 
 # network settings
-subnet_id = "${azurerm_subnet.infra.subnet_id}"
+subnet_id = "${azurerm_subnet.infra.id}"
 
 # VM Settings
 vm_sku = "Standard_B2s"

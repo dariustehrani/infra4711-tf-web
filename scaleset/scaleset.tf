@@ -4,6 +4,7 @@ resource "azurerm_virtual_machine_scale_set" "infra" {
  location            = "${var.location}"
  resource_group_name = "${var.resource_group_name}"
  upgrade_policy_mode = "Manual"
+ depends_on          = ["azurerm_lb.infra"]
 
  sku {
    name     = "${var.vm_sku}"
@@ -49,13 +50,14 @@ resource "azurerm_virtual_machine_scale_set" "infra" {
  }
 
  network_profile {
-   name    = "terraformnetworkprofile"
+   name    = "${var.project_name}-nic"
    primary = true
 
    ip_configuration {
-     name                                   = "IPConfiguration"
+     name                                   = "${var.project_name}-ipconfig"
      subnet_id                              = "${var.subnet_id}"
      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
+   #  load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.natpool.*.id, count.index)}"]
      primary = true
    }
  }
