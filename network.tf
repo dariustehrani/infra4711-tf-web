@@ -4,13 +4,6 @@ resource "azurerm_resource_group" "infra" {
   tags     = "${var.tags}"
 }
 
-resource "random_string" "fqdn" {
-  length  = 6
-  special = false
-  upper   = false
-  number  = false
-}
-
 resource "azurerm_virtual_network" "infra" {
   name                = "${var.project_name}-vnet"
   address_space       = ["10.0.0.0/16"]
@@ -26,11 +19,4 @@ resource "azurerm_subnet" "infra" {
   address_prefix       = "10.0.2.0/24"
 }
 
-resource "azurerm_public_ip" "infra" {
-  name                         = "${var.project_name}-public-ip"
-  location                     = "${var.location}"
-  resource_group_name          = "${azurerm_resource_group.infra.name}"
-  allocation_method            =  "Static"
-  domain_name_label            = "${random_string.fqdn.result}"
-  tags                         = "${var.tags}"
-}
+
