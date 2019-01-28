@@ -9,6 +9,3 @@ Please maintain the credentials outside your git repository e.g. through environ
 ARM_SUBSCRIPTION_ID
 ARM_TENANT_ID
 */
-
-provider "kubernetes" {
-}
