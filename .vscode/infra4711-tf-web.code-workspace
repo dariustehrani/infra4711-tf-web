@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "/Users/datehran/msprojects/infra4711-tf-web"
+		},
+		{
+			"path": "/Users/datehran/msprojects/infra4711-packer"
 		}
 	],
 	"settings": {}
