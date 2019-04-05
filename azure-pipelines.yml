@@ -13,13 +13,13 @@ variables:
 
 steps:
 - bash: terraform init && terraform validate -var-file=$TF_VAR_FILE -input=false
-  workingDirectory: $(Build.SourcesDirectory)
   displayName: terraform-validate
+  workingDirectory: $(Build.SourcesDirectory)
   failOnStderr: true
   # env:  # mapping of environment variables to add
 
-  - bash: terraform init && terraform plan -var-file=$TF_VAR_FILE -input=false -out=$PLAN
-  workingDirectory: $(Build.SourcesDirectory)
+- bash: terraform init && terraform plan -var-file=$TF_VAR_FILE -input=false -out=$PLAN
   displayName: terraform-plan
+  workingDirectory: $(Build.SourcesDirectory)
   failOnStderr: true
   # env:  # mapping of environment variables to add
