@@ -1,6 +1,6 @@
 
 resource "azurerm_virtual_machine_scale_set" "infra" {
- name                = "${local.prefix_snake}"
+ name                = "${var.prefix}-scaleset"
  location            = "${var.location}"
  resource_group_name = "${var.resource_group_name}"
  upgrade_policy_mode = "Manual"
@@ -34,7 +34,7 @@ resource "azurerm_virtual_machine_scale_set" "infra" {
  }
 
  os_profile {
-   computer_name_prefix = "${local.prefix_snake}"
+   computer_name_prefix = "${var.prefix}"
    admin_username       = "${var.admin_user}"
   # admin_password       = "${var.admin_password}"
    custom_data          = "${data.template_file.custom-data.rendered}"
@@ -50,11 +50,11 @@ resource "azurerm_virtual_machine_scale_set" "infra" {
  }
 
  network_profile {
-   name    = "${local.prefix_snake}-nic"
+   name    = "${var.prefix}-nic"
    primary = true
 
    ip_configuration {
-     name                                   = "${local.prefix_snake}-ipconfig"
+     name                                   = "${var.prefix}-ipconfig"
      subnet_id                              = "${var.subnet_id}"
      load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
    #  load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.natpool.*.id, count.index)}"]
