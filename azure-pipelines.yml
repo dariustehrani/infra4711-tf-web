@@ -13,6 +13,10 @@ variables:
 
 steps:
 
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: '0.12.1'
+
 - task: AzureCLI@1
   name: "terraform_init"
   inputs:
