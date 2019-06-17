@@ -21,6 +21,7 @@ steps:
   name: "terraform_init"
   inputs:
     azureSubscription: 'web4711'
+   addSpnToEnvironment: true
     scriptLocation: 'inlineScript'
     workingDirectory: $(Build.SourcesDirectory)
     inlineScript: 'terraform init'
@@ -39,6 +40,7 @@ steps:
   name: "terraform_validate"
   inputs:
     azureSubscription: 'web4711'
+    addSpnToEnvironment: true
     scriptLocation: 'inlineScript'
     workingDirectory: $(Build.SourcesDirectory)
     inlineScript: 'terraform validate -var-file=$TF_VAR_FILE -input=false'
@@ -47,6 +49,7 @@ steps:
   name: "terraform_plan"
   inputs:
     azureSubscription: 'web4711'
+    addSpnToEnvironment: true
     scriptLocation: 'inlineScript'
     workingDirectory: $(Build.SourcesDirectory)
     inlineScript: 'terraform plan -var-file=$TF_VAR_FILE -input=false -out=./$PLAN'
@@ -55,6 +58,7 @@ steps:
   name: "terraform_apply"
   inputs:
     azureSubscription: 'web4711'
+    addSpnToEnvironment: true
     scriptLocation: 'inlineScript'
     workingDirectory: $(Build.SourcesDirectory)
     inlineScript: 'terraform apply ./$PLAN -var-file=$TF_VAR_FILE -input=false -auto-approve'
