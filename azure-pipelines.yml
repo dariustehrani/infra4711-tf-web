@@ -12,14 +12,59 @@ variables:
  TF_VAR_FILE: test.tf-test
 
 steps:
-- bash: terraform init && terraform validate -var-file=$TF_VAR_FILE -input=false
-  displayName: terraform-validate
-  workingDirectory: $(Build.SourcesDirectory)
-  failOnStderr: true
-  # env:  # mapping of environment variables to add
 
-- bash: terraform init && terraform plan -var-file=$TF_VAR_FILE -input=false -out=$PLAN
-  displayName: terraform-plan
-  workingDirectory: $(Build.SourcesDirectory)
-  failOnStderr: true
-  # env:  # mapping of environment variables to add
+- task: AzureCLI@1
+  name: "terraform_init"
+  inputs:
+    azureSubscription: 'web4711'
+    scriptLocation: 'inlineScript'
+    workingDirectory: $(Build.SourcesDirectory)
+    inlineScript: 'terraform init'
+
+    
+- task: AzureCLI@1
+  name: "terraform_workspace_select"
+  inputs:
+    azureSubscription: 'web4711'
+    scriptLocation: 'inlineScript'
+    workingDirectory: $(Build.SourcesDirectory)
+    inlineScript: 'terraform workspace show && terraform workspace select dev'
+
+
+- task: AzureCLI@1
+  name: "terraform_validate"
+  inputs:
+    azureSubscription: 'web4711'
+    scriptLocation: 'inlineScript'
+    workingDirectory: $(Build.SourcesDirectory)
+    inlineScript: 'terraform validate -var-file=$TF_VAR_FILE -input=false'
+
+- task: AzureCLI@1
+  name: "terraform_plan"
+  inputs:
+    azureSubscription: 'web4711'
+    scriptLocation: 'inlineScript'
+    workingDirectory: $(Build.SourcesDirectory)
+    inlineScript: 'terraform plan -var-file=$TF_VAR_FILE -input=false -out=./$PLAN'
+
+- task: AzureCLI@1
+  name: "terraform_apply"
+  inputs:
+    azureSubscription: 'web4711'
+    scriptLocation: 'inlineScript'
+    workingDirectory: $(Build.SourcesDirectory)
+    inlineScript: 'terraform apply ./$PLAN -var-file=$TF_VAR_FILE -input=false -auto-approve'
+    
+
+# - bash: terraform init && terraform validate -var-file=$TF_VAR_FILE -input=false
+#   displayName: terraform-validate
+#   workingDirectory: $(Build.SourcesDirectory)
+#   failOnStderr: true
+#   # env:  # mapping of environment variables to add
+# 
+# - bash: terraform init && terraform plan -var-file=$TF_VAR_FILE -input=false -out=$PLAN
+#   displayName: terraform-plan
+#   workingDirectory: $(Build.SourcesDirectory)
+#   failOnStderr: true
+#   # env:  # mapping of environment variables to add
+# 
