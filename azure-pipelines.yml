@@ -23,7 +23,7 @@ steps:
     addSpnToEnvironment: true
     scriptLocation: 'inlineScript'
     workingDirectory: $(Build.SourcesDirectory)
-    inlineScript: 'terraform init'
+    inlineScript: 'az login && terraform init'
 
     
 - task: AzureCLI@1
