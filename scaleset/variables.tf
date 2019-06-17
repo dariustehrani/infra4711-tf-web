@@ -1,5 +1,5 @@
-variable "project_name" {
-  description = "Define a project name that everyone can relate to"
+variable "prefix" {
+  description = "Define a prefix for all of your resources"
   type = "string"
 }
 
