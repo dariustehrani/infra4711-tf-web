@@ -1,4 +1,4 @@
-project_name = "web4711"
+prefix = "web4711"
 location = "westeurope"
 resource_group_name = "web4711"
 

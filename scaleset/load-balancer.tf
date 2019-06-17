@@ -6,7 +6,7 @@ resource "random_string" "fqdn" {
   number  = false
 }
 resource "azurerm_public_ip" "infra" {
-  name                         = "${var.project_name}-public-ip"
+  name                         = "${var.prefix}-public-ip"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group_name}"
   allocation_method            =  "Static"
@@ -16,7 +16,7 @@ resource "azurerm_public_ip" "infra" {
 
 # Load-Balancer
 resource "azurerm_lb" "infra" {
- name                = "infra-lb"
+ name                = "${var.prefix}-lb"
  location            = "${var.location}"
  resource_group_name = "${var.resource_group_name}"
 
@@ -28,20 +28,20 @@ resource "azurerm_lb" "infra" {
  tags = "${var.tags}"
 }
 resource "azurerm_lb_backend_address_pool" "bpepool" {
- resource_group_name = "${var.resource_group_name}"
+ resource_group_name = "${var.prefix}-be-pool"
  loadbalancer_id     = "${azurerm_lb.infra.id}"
  name                = "BackEndAddressPool"
 }
 
 resource "azurerm_lb_probe" "infra" {
- resource_group_name = "${var.resource_group_name}"
+ resource_group_name = "${var.prefix}-probe"
  loadbalancer_id     = "${azurerm_lb.infra.id}"
  name                = "probe-${var.application_port}"
  port                = "${var.application_port}"
 }
 
 resource "azurerm_lb_rule" "lbrule" {
-   resource_group_name            = "${var.resource_group_name}"
+   resource_group_name            = "${var.prefix}-lb-rule-1"
    loadbalancer_id                = "${azurerm_lb.infra.id}"
    name                           = "http"
    protocol                       = "Tcp"
