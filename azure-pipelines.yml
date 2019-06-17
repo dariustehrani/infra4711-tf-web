@@ -12,7 +12,6 @@ variables:
  TF_VAR_FILE: test.tf-test
 
 steps:
-
 - task: TerraformInstaller@0
   inputs:
     terraformVersion: '0.12.1'
@@ -21,7 +20,7 @@ steps:
   name: "terraform_init"
   inputs:
     azureSubscription: 'web4711'
-   addSpnToEnvironment: true
+    addSpnToEnvironment: true
     scriptLocation: 'inlineScript'
     workingDirectory: $(Build.SourcesDirectory)
     inlineScript: 'terraform init'
