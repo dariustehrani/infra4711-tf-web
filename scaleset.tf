@@ -2,7 +2,7 @@ module "web_scaleset" {
 # where to load the module from, e.g. local path or git path
   source                = "./scaleset/"
   prefix                = "${local.prefix_snake}"
-  resource_group_name   = "${var.resource_group_name}"
+  resource_group_name   = "${azurerm_resource_group.infra.name}"
   location              = "${var.location}" 
   tags                  = "${var.tags}"
 
