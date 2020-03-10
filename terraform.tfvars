@@ -1,5 +1,5 @@
 prefix              = "slb-web4711"
-location            = "northeurope"
+location            = "germanywestcentral"
 resource_group_name = "slb-web4711"
 
 tags = {
