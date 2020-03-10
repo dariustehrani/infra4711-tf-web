@@ -1,6 +1,6 @@
 variable "prefix" {
   description = "Define a project name that everyone can relate to"
-  type        = "string"
+  type        = string
 }
 
 variable "resource_group_name" {
@@ -13,6 +13,6 @@ variable "location" {
 
 variable "tags" {
   description = "A map of the tags to use for the resources that are deployed"
-  type        = "map"
+  type        = map(string)
 }
 

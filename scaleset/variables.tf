@@ -1,6 +1,6 @@
 variable "prefix" {
   description = "Define a prefix for all of your resources"
-  type = "string"
+  type        = string
 }
 
 variable "resource_group_name" {
@@ -13,42 +13,39 @@ variable "location" {
 
 variable "tags" {
   description = "A map of the tags to use for the resources that are deployed"
-  type        = "map"
+  type        = map(string)
 }
 
 variable "subnet_id" {
   description = "subnet id to be used"
-  type = "string"
-
+  type        = string
 }
 
 variable "vm_sku" {
   description = "set the VM size"
-  type = "string"
-  default = "Standard_B2s"
-  
+  type        = string
+  default     = "Standard_B2s"
 }
 
 variable "capacity" {
-    description = "the count of VMs to be provisioned"
-    type = "string"
-    default = "2"
+  description = "the count of VMs to be provisioned"
+  type        = string
+  default     = "2"
 }
 
 variable "admin_user" {
   description = "please define the name of the local admin"
-  type = "string"
-  
+  type        = string
 }
 
 variable "path_to_ssh_pubkey" {
   description = "please point to a local SSH Pubkey that shall be allowed for login on the scaleset. Notice that you need to combine this with the admin user you defined previously"
-  type = "string"
-
+  type        = string
 }
 
 variable "application_port" {
-    description = "ports that are exposed by the LB. also relevant for health checks"
-    type = "string"
-    default = "80"
+  description = "ports that are exposed by the LB. also relevant for health checks"
+  type        = string
+  default     = "80"
 }
+
