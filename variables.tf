@@ -1,6 +1,6 @@
 variable "prefix" {
   description = "Define a project name that everyone can relate to"
-  type = "string"
+  type        = "string"
 }
 
 variable "resource_group_name" {
