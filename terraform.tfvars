@@ -1,6 +1,6 @@
-prefix              = "slb-web4711"
+prefix              = "web4711"
 location            = "westeurope"
-resource_group_name = "slb-web4711"
+resource_group_name = "web4711"
 
 tags = {
   environment = "lab"
