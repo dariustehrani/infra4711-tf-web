@@ -8,7 +8,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "infra" {
   instances            = var.capacity
  
   computer_name_prefix = var.prefix
-  custom_data = data.template_file.custom-data.rendered
+  custom_data = "${base64encode(data.template_file.custom-data.rendered)}"
+
 
   source_image_reference {
     publisher = "Canonical"
@@ -22,7 +23,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "infra" {
     storage_account_type = "Standard_LRS"
   }
   
-  
+  admin_username      = var.admin_user
+
   admin_ssh_key {
       public_key = file(var.path_to_ssh_pubkey)
       username      = var.admin_user
@@ -36,7 +38,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "infra" {
       name                                   = "${var.prefix}-ipconfig"
       subnet_id                              = var.subnet_id
       load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.bpepool.id]
-      #  load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.natpool.*.id, count.index)}"]
+      load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.natpool.*.id, count.index)}"]
       primary = true
     }
   }
