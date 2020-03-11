@@ -1,7 +1,7 @@
 resource "azurerm_network_security_group" "inbound-web" {
   name                = "inbound-web"
   location            = var.location
-  resource_group_name = var.resource_group_name
+  resource_group_name = azurerm_resource_group.infra.name
 }
 
 resource "azurerm_network_security_rule" "web-80" {
@@ -14,7 +14,7 @@ resource "azurerm_network_security_rule" "web-80" {
   destination_port_range      = "80"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = var.resource_group_name
+  resource_group_name         = azurerm_resource_group.infra.name
   network_security_group_name = azurerm_network_security_group.inbound-web.name
 }
 
@@ -28,7 +28,7 @@ resource "azurerm_network_security_rule" "web-443" {
   destination_port_range      = "443"
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
-  resource_group_name         = var.resource_group_name
+  resource_group_name         = azurerm_resource_group.infra.name
   network_security_group_name = azurerm_network_security_group.inbound-web.name
 }
 

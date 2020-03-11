@@ -6,6 +6,7 @@ project_name = "4711"
 resource_group_name = "4711"
 location = "westeurope"
 tags = "your tags"
+random-id = "usedforstorageaccount"
 
 # network settings
 subnet_id = "subnetid123"
