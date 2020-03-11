@@ -20,7 +20,7 @@ resource "azurerm_network_security_rule" "web-80" {
 
 resource "azurerm_network_security_rule" "web-443" {
   name                        = "web-443"
-  priority                    = 100
+  priority                    = 101
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
