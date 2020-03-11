@@ -9,7 +9,7 @@ resource "random_string" "fqdn" {
 resource "azurerm_public_ip" "infra" {
   name                = "${var.prefix}-public-ip"
   location            = var.location
-  sku 	              = "Standard"
+  sku                 = "Standard"
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
   domain_name_label   = random_string.fqdn.result

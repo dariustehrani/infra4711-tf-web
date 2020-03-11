@@ -5,6 +5,7 @@ module "web_scaleset" {
   resource_group_name = azurerm_resource_group.infra.name
   location            = var.location
   tags                = var.tags
+  random-id           = random_id.random-id.hex
 
   # network settings
   subnet_id = azurerm_subnet.infra.id

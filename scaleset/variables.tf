@@ -49,3 +49,7 @@ variable "application_port" {
   default     = "80"
 }
 
+variable "random-id" {
+  description = "project-wide random id"
+  type = string
+}

@@ -19,5 +19,6 @@ resource "azurerm_subnet" "infra" {
 
   virtual_network_name = azurerm_virtual_network.infra.name
   address_prefix       = "10.0.2.0/24"
+
 }
 
