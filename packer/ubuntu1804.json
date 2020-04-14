@@ -20,13 +20,6 @@
         "tenant_id": "{{user `tenant_id`}}",
         "client_id": "{{user `client_id`}}",
         "client_secret": "{{user `client_secret`}}",
-        "shared_image_gallery_destination": {
-          "resource_group": "{{user `resource_group_name`}}",
-          "gallery_name": "",
-          "image_name": "{{user `my_image_name`}}",
-          "image_version": "{{user `build_id`}}",
-          "replication_regions": ["westeurope"]
-      },
         "managed_image_name": "{{user `my_image_name`}}-{{user `build_id`}}",
         "managed_image_resource_group_name": "{{user `resource_group_name`}}",
         "os_type": "Linux",
@@ -36,7 +29,14 @@
         "location": "{{user `azure_location`}}",
         "vm_size": "Standard_DS2_v2"
 
-      }
+      },
+      "shared_image_gallery_destination": {
+        "resource_group": "{{user `resource_group_name`}}",
+        "gallery_name": "",
+        "image_name": "{{user `my_image_name`}}",
+        "image_version": "{{user `build_id`}}",
+        "replication_regions": ["westeurope"]
+    }
     ],
     "provisioners": [
       {
