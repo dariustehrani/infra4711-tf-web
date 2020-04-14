@@ -27,17 +27,17 @@
         "image_offer": "UbuntuServer",
         "image_sku": "18.04-LTS",
         "location": "{{user `azure_location`}}",
-        "vm_size": "Standard_DS2_v2"
+        "vm_size": "Standard_DS2_v2",
 
-      },
-      "shared_image_gallery_destination": {
-        "resource_group": "{{user `resource_group_name`}}",
-        "gallery_name": "",
-        "image_name": "{{user `my_image_name`}}",
-        "image_version": "{{user `build_id`}}",
-        "replication_regions": ["westeurope"]
-    }
-    ],
+        "shared_image_gallery_destination": {
+          "resource_group": "{{user `resource_group_name`}}",
+          "gallery_name": "{{user `my_sig_name`}}",
+          "image_name": "{{user `my_image_name`}}",
+          "image_version": "{{user `build_id`}}",
+          "replication_regions": ["westeurope"]
+      }
+      }
+  ],
     "provisioners": [
       {
         "type": "file",
