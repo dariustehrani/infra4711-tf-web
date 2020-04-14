@@ -8,7 +8,9 @@
       "build_id": "{{env `BUILD_BUILDID`}}",
       "azure_location": "westeurope",      
       "resource_group_name": "tf-infra-4711",
-      "storage_account": "packerinfra4711"
+      "storage_account": "packerinfra4711",
+      "my_image_name": "4711-ubuntu-web",
+      "my_sig_name": "infra4711sig"
     },
     "sensitive-variables": ["subscription_id", "tenant_id", "client_id", "client_secret"],
     "builders": [
@@ -18,7 +20,14 @@
         "tenant_id": "{{user `tenant_id`}}",
         "client_id": "{{user `client_id`}}",
         "client_secret": "{{user `client_secret`}}",
-        "managed_image_name": "4711-ubuntu-{{user `build_id`}}",
+        "shared_image_gallery_destination": {
+          "resource_group": "{{user `resource_group_name`}}",
+          "gallery_name": "",
+          "image_name": "{{user `my_image_name`}}",
+          "image_version": "{{user `build_id`}}",
+          "replication_regions": ["westeurope"]
+      },
+        "managed_image_name": "{{user `my_image_name`}}-{{user `build_id`}}",
         "managed_image_resource_group_name": "{{user `resource_group_name`}}",
         "os_type": "Linux",
         "image_publisher": "Canonical",
@@ -26,6 +35,7 @@
         "image_sku": "18.04-LTS",
         "location": "{{user `azure_location`}}",
         "vm_size": "Standard_DS2_v2"
+
       }
     ],
     "provisioners": [

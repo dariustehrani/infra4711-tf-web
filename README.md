@@ -2,6 +2,13 @@
 
 This repository is used for demo purposes only.
 
+
+# Packer Images
+
+### Infos on shared image galleries
+https://docs.microsoft.com/en-us/azure/virtual-machines/linux/shared-images?toc=/azure/virtual-machines/windows/toc.json&bc=/azure/virtual-machines/windows/breadcrumb/toc.json
+
+
 # related links
 
 
