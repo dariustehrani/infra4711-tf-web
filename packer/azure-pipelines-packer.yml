@@ -19,7 +19,7 @@ steps:
   inputs:
     connectedServiceType: azure
     connectedServiceAzure: 'tf-infra-4711'
-    templatePath: $(Pipeline.Workspace)/ubuntu1804.json
+    templatePath: ubuntu1804.json
     #force: true|false Force a build to continue if artifacts exist, deletes existing artifacts
     #variables-file: JSON file containing user variables.
     #options: Additional options, see Packer Commands (CLI)  for more information.
@@ -32,7 +32,7 @@ steps:
   inputs:
     connectedServiceType: azure
     connectedServiceAzure: 'tf-infra-4711'
-    templatePath: $(Pipeline.Workspace)/ubuntu1804.json
+    templatePath: ubuntu1804.json
     #force: true|false Force a build to continue if artifacts exist, deletes existing artifacts
     #variables-file: JSON file containing user variables.
     #options: Additional options, see Packer Commands (CLI)  for more information.
