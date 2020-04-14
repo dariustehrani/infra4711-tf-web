@@ -1,5 +1,5 @@
 {
-    "min_packer_version": "1..5",
+    "min_packer_version": "1.5.5",
     "variables": {
       "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
       "tenant_id": "{{env `ARM_TENANT_ID`}}",
