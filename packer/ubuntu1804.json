@@ -55,18 +55,18 @@
       },
       {
         "type": "shell",
-        "script": "scripts/os-update.sh",
+        "script": "{{template_dir}}/scripts/os-update.sh",
         "pause_before": "10s",
         "timeout": "30s"
       },
       {
         "type": "shell",
-        "script": "scripts/azuretools.sh",
+        "script": "{{template_dir}}/scripts/azuretools.sh",
         "timeout": "20s"
       },
       {
         "type": "shell",
-        "script": "scripts/apache_httpd.sh",
+        "script": "{{template_dir}}/scripts/apache_httpd.sh",
         "pause_before": "5s",
         "timeout": "20s"
       },
