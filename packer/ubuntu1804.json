@@ -7,8 +7,8 @@
       "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
       "build_id": "{{env `BUILD_BUILDID`}}",
       "azure_location": "westeurope",      
-      "resource_group_name": "packer4711",
-      "storage_account": "packer4711"
+      "resource_group_name": "tf-infra-4711",
+      "storage_account": "packerinfra4711"
     },
     "sensitive-variables": ["subscription_id", "tenant_id", "client_id", "client_secret"],
     "builders": [
