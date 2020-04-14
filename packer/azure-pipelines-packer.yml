@@ -37,4 +37,3 @@ steps:
     #variables-file: JSON file containing user variables.
     #options: Additional options, see Packer Commands (CLI)  for more information.
     command: build
-
