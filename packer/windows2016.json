@@ -1,0 +1,49 @@
+{
+    "min_packer_version": "1.3.5",
+    "variables": {
+      "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}",
+      "tenant_id": "{{env `ARM_TENANT_ID`}}",
+      "client_id": "{{env `ARM_CLIENT_ID`}}",
+      "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
+      "build_id": "{{env `BUILD_BUILDID`}}",
+      "azure_location": "westeurope",      
+      "resource_group_name": "packer4711",
+      "storage_account": "packer4711"
+    },
+    "sensitive-variables": ["subscription_id", "tenant_id", "client_id", "client_secret"],
+    "builders": [
+      {
+        "type": "azure-arm",
+        "subscription_id": "{{user `subscription_id`}}",
+        "tenant_id": "{{user `tenant_id`}}",
+        "client_id": "{{user `client_id`}}",
+        "client_secret": "{{user `client_secret`}}",
+        "managed_image_name": "4711-win2k16-{{user `build_id`}}",
+        "managed_image_resource_group_name": "{{user `resource_group_name`}}",
+        "os_type": "Windows",
+        "image_publisher": "MicrosoftWindowsServer",
+        "image_offer": "WindowsServer",
+        "image_sku": "2016-Datacenter-Server-Core-smalldisk",
+
+        "communicator": "winrm",
+        "winrm_use_ssl": true,
+        "winrm_insecure": true,
+        "winrm_timeout": "3m",
+        "winrm_username": "packer",
+
+        "location": "{{user `azure_location`}}",
+        "vm_size": "Standard_DS2_v2"
+        
+      }
+    ],
+    "provisioners": [
+      {
+    "type": "powershell",
+    "inline": [
+      "Add-WindowsFeature Web-Server",
+      "& $env:SystemRoot\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /quiet /quit",
+      "while($true) { $imageState = Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\State | Select ImageState; if($imageState.ImageState -ne 'IMAGE_STATE_GENERALIZE_RESEAL_TO_OOBE') { Write-Output $imageState.ImageState; Start-Sleep -s 10  } else { break } }"
+        ]
+      }
+    ]
+  } 

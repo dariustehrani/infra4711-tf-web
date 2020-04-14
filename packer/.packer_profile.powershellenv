@@ -1,0 +1,10 @@
+#!/bin/bash
+# This file is only for explorative use.
+# build secrets belong into azure key vault or azure pipelines.
+# consider making use of a Managed Service Identity for production usage.
+# to use it, please copy it into your home directory remove the .sample and amend the corresponding values.
+# you then can run source ~/.packer_profile on each login shell to enable AZURERM API access.
+$Env:ARM_SUBSCRIPTION_ID +="YOURS"
+$Env:ARM_TENANT_ID += "YOURS"
+$Env:ARM_CLIENT_ID += "YOURS"
+$Env:ARM_CLIENT_SECRET += "YOURS"
