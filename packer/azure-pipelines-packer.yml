@@ -3,6 +3,7 @@
 
 pool:
   vmImage: 'Ubuntu 18.04'
+  
 trigger:
 - frontdoor
 
