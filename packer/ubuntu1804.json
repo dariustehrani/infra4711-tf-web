@@ -47,19 +47,36 @@
       {
         "type": "shell",
         "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",
+        
         "inline": [
-          "apt-get update && apt-get install apt-transport-https lsb-release software-properties-common dirmngr -y",
-          "AZ_REPO=$(lsb_release -cs)",
-          "echo \"deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main\" | sudo tee /etc/apt/sources.list.d/azure-cli.list",
-          "apt-key --keyring /etc/apt/trusted.gpg.d/Microsoft.gpg adv --keyserver packages.microsoft.com --recv-keys BC528686B50D79E339D3721CEB3E94ADBE1229CF",
-          "apt-key adv --keyserver packages.microsoft.com --recv-keys 417A0893",
-          "apt-get update && apt-get install azure-cli",
-          "DEBIAN_FRONTEND=noninteractive apt-get -y dist-upgrade",
-          "DEBIAN_FRONTEND=noninteractive apt-get -y autoremove && apt-get -y clean",
-          "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+          "apt-get update && apt-get install apt-transport-https lsb-release software-properties-common dirmngr -y"
         ],
         "inline_shebang": "/bin/sh -x",
-        "pause_before": "30s"
-      }
+        "pause_before": "10s"
+      },
+      {
+        "type": "shell",
+        "script": "scripts/os-update.sh",
+        "pause_before": "10s",
+        "timeout": "30s"
+      },
+      {
+        "type": "shell",
+        "script": "scripts/azuretools.sh",
+        "timeout": "20s"
+      },
+      {
+        "type": "shell",
+        "script": "scripts/apache_httpd.sh",
+        "pause_before": "5s",
+        "timeout": "20s"
+      },
+      "inline": [
+        "DEBIAN_FRONTEND=noninteractive apt-get -y autoremove && apt-get -y clean",
+        "/usr/sbin/waagent -force -deprovision+user && export HISTSIZE=0 && sync"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "pause_before": "30s"
+    }
     ]
   } 
