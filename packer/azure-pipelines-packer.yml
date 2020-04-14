@@ -2,33 +2,24 @@
 # azure-pipelines.yml
 
 pool:
-  vmImage: 'Ubuntu 16.04'
+  vmImage: 'Ubuntu 18.04'
+  
 trigger:
-- master
+- frontdoor
+
 steps:
-- task: riezebosch.Packer.PackerTool.PackerTool@0
-  displayName: 'Use Packer 1.3.5'
+
+- task: PackerTool@0
   inputs:
-    version: 1.3.5
+    version: '1.5.5'
 
 # Validate
 - task: Packer@1
   displayName: 'ubuntu 18.04 packer validate'
   inputs:
     connectedServiceType: azure
-    connectedServiceAzure: 'packer4711'
-    templatePath: ubuntu1804.json
-    #force: true|false Force a build to continue if artifacts exist, deletes existing artifacts
-    #variables-file: JSON file containing user variables.
-    #options: Additional options, see Packer Commands (CLI)  for more information.
-    command: validate
-
-- task: Packer@1
-  displayName: 'windows 2016 core packer validate'
-  inputs:
-    connectedServiceType: azure
-    connectedServiceAzure: 'packer4711'
-    templatePath: windows2016.json
+    connectedServiceAzure: 'tf-infra-4711'
+    templatePath: $(Pipeline.Workspace)/packer/ubuntu1804.json
     #force: true|false Force a build to continue if artifacts exist, deletes existing artifacts
     #variables-file: JSON file containing user variables.
     #options: Additional options, see Packer Commands (CLI)  for more information.
@@ -40,20 +31,8 @@ steps:
   displayName: 'ubuntu 18.04 packer build'
   inputs:
     connectedServiceType: azure
-    connectedServiceAzure: 'packer4711'
-    templatePath: ubuntu1804.json
-    #force: true|false Force a build to continue if artifacts exist, deletes existing artifacts
-    #variables-file: JSON file containing user variables.
-    #options: Additional options, see Packer Commands (CLI)  for more information.
-    command: build
-
-
-- task: Packer@1
-  displayName: 'windows 2016 core packer build'
-  inputs:
-    connectedServiceType: azure
-    connectedServiceAzure: 'packer4711'
-    templatePath: windows2016.json
+    connectedServiceAzure: 'tf-infra-4711'
+    templatePath: $(Pipeline.Workspace)/packer/ubuntu1804.json
     #force: true|false Force a build to continue if artifacts exist, deletes existing artifacts
     #variables-file: JSON file containing user variables.
     #options: Additional options, see Packer Commands (CLI)  for more information.
