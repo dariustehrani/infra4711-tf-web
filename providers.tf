@@ -1,29 +1,41 @@
-provider "azurerm" {
-  version = ">=2.76"
-  features {}
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "2.76.0"
+    }
 
-}
-
-provider "local" {
-  version = ">=2.1.0"
+    random = {
+      source  = "hashicorp/random"
+      version = "3.1.0"
+    }
+    null = {
+      source  = "hashicorp/null"
+      version = "3.1.0"
+    }
+    local = {
+      source  = "hashicorp/local"
+      version = "2.1.0"
+    }
+  }
 }
 
 provider "random" {
-  version = ">=3.1.0"
+  # Configuration options
 }
 
 provider "null" {
-  version = ">=3.1.0"
+  # Configuration options
 }
 
-terraform {
-  backend "azurerm" {
-    resource_group_name  = "infra4711"
-    storage_account_name = "infra4711"
-    container_name       = "tfstate"
-    key                  = "web4711.terraform.tfstate"
-  }
+provider "local" {
+  # Configuration options
 }
+
+provider "azurerm" {
+  features {}
+}
+
 
 /*
 Please maintain the credentials outside your git repository e.g. through environment variables.
